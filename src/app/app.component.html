@@ -1,0 +1,25 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" routerLink="/">
+    <span class="fa fa-list-ul mr-3"></span>{{ title }}
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li *ngIf="!isAuthenticated" class="nav-item">
+        <a class="nav-link" routerLink="/users/sign-up" routerLinkActive="active">Konto erstellen</a>
+      </li>
+      <li *ngIf="!isAuthenticated" class="nav-item">
+        <a class="nav-link" routerLink="/users/sign-in" routerLinkActive="active">Anmelden</a>
+      </li>
+      <li *ngIf="isAuthenticated" class="nav-item">
+        <a class="nav-link" routerLink="/users/sign-out" routerLinkActive="active">Abmelden</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

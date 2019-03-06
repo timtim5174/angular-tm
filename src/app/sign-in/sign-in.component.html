@@ -1,0 +1,17 @@
+<app-notification [error]="errorMessage"></app-notification>
+<h1>Anmelden</h1>
+<form (ngSubmit)="onSubmit()" #signInForm="ngForm">
+  <div class="form-group">
+    <label for="email" class="control-label">E-Mail</label>
+    <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="authData.email" appEmail #email="ngModel">
+    <app-error-message [control]='email' error='required' message='E-Mail ist erforderlich'></app-error-message>
+    <app-error-message [control]='email' error='appEmail' message='Ungültige E-Mail-Adresse.'></app-error-message>
+  </div>
+  <div class="form-group">
+    <label for="password" class="control-label">Passwort</label>
+    <input type="password" class="form-control" id="password" required minlength="10" [(ngModel)]="authData.password" name="password" #password="ngModel">
+    <app-error-message [control]='password' error='required' message='Passwort ist erforderlich'></app-error-message>
+    <app-error-message [control]='password' error='minlength' message='Passwort muss mind. 10 Zeichen lang sein.'></app-error-message>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!signInForm.valid">Anmelden</button>
+</form>

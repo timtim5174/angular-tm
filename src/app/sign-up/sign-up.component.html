@@ -1,0 +1,28 @@
+<app-notification [error]="errorMessage"></app-notification>
+<h1>Konto erstellen</h1>
+<form (ngSubmit)="onSubmit()" #signUpForm="ngForm">
+  <div class="form-group">
+    <label for="name" class="control-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" required autofocus="autofocus" [(ngModel)]="accountData.name" #name="ngModel">
+    <app-error-message [control]='name' error='required' message='Name ist erforderlich'></app-error-message>
+  </div>
+  <div class="form-group">
+    <label for="email" class="control-label">E-Mail</label>
+    <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="accountData.email" appEmail #email="ngModel">
+    <app-error-message [control]='email' error='required' message='E-Mail ist erforderlich'></app-error-message>
+    <app-error-message [control]='email' error='appEmail' message='Ungültige E-Mail-Adresse.'></app-error-message>
+  </div>
+  <div class="form-group">
+    <label for="password" class="control-label">Passwort</label>
+    <input type="password" class="form-control" id="password" required minlength="10" [(ngModel)]="accountData.password" name="password" #password="ngModel">
+    <app-error-message [control]='password' error='required' message='Passwort ist erforderlich'></app-error-message>
+    <app-error-message [control]='password' error='minlength' message='Passwort muss mind. 10 Zeichen lang sein.'></app-error-message>
+  </div>
+  <div class="form-group">
+    <label for="password_check" class="control-label">Passwort nochmals eingeben</label>
+    <input type="password" class="form-control" id="password-check" name="passwordCheck" required [appSameContentAs]="password" [(ngModel)]="accountData.passwordCheck" #passwordCheck="ngModel">
+    <app-error-message [control]='password' error='required' message='Erneute Eingabe des Passworts ist erforderlich'></app-error-message>  
+    <app-error-message [control]='passwordCheck' error='appSameContentAs' message='Passwörter stimmen nicht überein.'></app-error-message>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!signUpForm.valid">Konto erstellen</button>
+</form>

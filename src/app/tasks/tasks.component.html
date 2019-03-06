@@ -1,0 +1,16 @@
+<app-notification [error]="errorMessage"></app-notification>
+<form (ngSubmit)="addTask()">
+  <input type="text" name="title" placeholder="Neue Aufgabe" class="form-control form-control-lg mt-3 mb-3" autofocus [(ngModel)]="newTaskTitle">
+</form>
+<ul *ngIf="tasks?.length; else noTasks" class="list-group">
+  <li *ngFor="let task of tasks" class="task flex-nowrap list-group-item">
+    <span class="toggle" (click)="toggleStatus(task)">
+      <span *ngIf="isDone(task)" class="checked fa fa-lg fa-check"></span>
+    </span>
+    <span class="title">{{ task.title }}</span>
+    <span class="remove-task fa fa-lg fa-times" (click)="removeTask(task)"></span>
+  </li>
+</ul>
+<ng-template #noTasks>
+  <app-notification [info]="'Keine Aufgaben vorhanden!'"></app-notification>
+</ng-template>
